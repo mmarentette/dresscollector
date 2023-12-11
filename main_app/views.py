@@ -1,9 +1,6 @@
 from django.shortcuts import render
 
-dresses = [
-    {'style': 'Mira', 'collection': 'Eternal', 'designer': 'Daalarna', 'size': 0},
-    {'style': 'Minty', 'collection': 'Provence', 'designer': 'Tom Sebastien', 'size': 0}
-]
+from .models import Dress
 
 # Create your views here.
 def home(request):
@@ -15,6 +12,7 @@ def about(request):
 def dresses_index(request):
     # We are namespacing the index.html template by putting it in a new tempates/dresses folder for organization purposes
     # We pass a dictionary as a third positional argument in render; we can access the values in the template by using the key 'dresses'
+    dresses = Dress.objects.all()
     return render(request, 'dresses/index.html', {
         'dresses': dresses
     })

@@ -6,11 +6,10 @@
 {% for dress in dresses %}
     <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ dress.style }}</span>
-            <p>Style: {{ dress.style }}</p>
+            <span class="card-title">{{ dress.name }}</span>
             <p>Designer: {{ dress.designer }}</p>
             <p>Collection: {{ dress.collection }}</p>
-            <p>Size: {{ dress.size }}</p>
+            <p>Style: {{ dress.style }}</p>
         </div>
     </div>
 {% endfor %}
