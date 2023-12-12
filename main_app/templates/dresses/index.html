@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    
+
 <h1>All Dresses</h1>
 
 {% for dress in dresses %}
+<a href="{% url 'detail' dress.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ dress.name }}</span>
@@ -12,8 +13,7 @@
             <p>Style: {{ dress.style }}</p>
         </div>
     </div>
+</a>
 {% endfor %}
-    
 
 {% endblock content %}
-    

@@ -16,3 +16,9 @@ def dresses_index(request):
     return render(request, 'dresses/index.html', {
         'dresses': dresses
     })
+
+def dresses_detail(request, dress_id):
+    dress = Dress.objects.get(id=dress_id)
+    return render(request, 'dresses/detail.html', {
+        'dress': dress
+    })
