@@ -24,6 +24,28 @@
             {{ review_form.as_p }}
             <button type="submit" class="btn">Submit</button>
         </form>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Note that we do not add parens after .all -->
+                {% for review in dress.review_set.all %}
+                <tr>
+                    <td>{{ review.reviewer_name }}</td>
+                    <td>{{ review.rating }}</td>
+                    <td>{{ review.text }}</td>
+                </tr>
+                    
+                {% endfor %}
+                    
+            </tbody>
+
+        </table>
     </div>
 </div>
 
