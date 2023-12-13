@@ -1,10 +1,27 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from localflavor.ca.models import CAProvinceField, CAPostalCodeField
 
 RATING_CHOICES = [(i, i) for i in range(1, 6)]
 
 # Create your models here.
+class Store(models.Model):
+    name = models.CharField(max_length=100) #CharField max_length defaults to 200
+    street_address = models.CharField(max_length=100)
+    city = models.CharField(
+        max_length=50,
+        default='Toronto',
+    )
+    province = CAProvinceField(
+        default='ON',
+    )
+    postal_code = CAPostalCodeField()
+    website_url = models.URLField() #URLField max_length defaults to 200
+
+    def __str__(self):
+        return f"{self.name}"
+
 class Dress(models.Model):
     STYLE_CHOICES = {
         'a_line': 'A-line',

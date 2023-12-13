@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 
-from .models import Dress
+from .models import Dress, Store
 from .forms import ReviewForm
 
 # Create your views here.
@@ -50,3 +51,6 @@ class DressUpdate(UpdateView):
 class DressDelete(DeleteView):
     model = Dress
     success_url = '/dresses'
+
+class StoreList(ListView):
+    model = Store
