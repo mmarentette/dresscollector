@@ -10,7 +10,7 @@
                 <span class="card-title">{{ dress.name }}</span>
                 <p>Designer: {{ dress.designer }}</p>
                 <p>Collection: {{ dress.collection }}</p>
-                <p>Style: {{ dress.style }}</p>
+                <p>Style: {{ dress.get_style_display }}</p>
             </div>
             <div class="card-action">
                 <a href="{% url 'dresses_update' dress.id %}">Edit</a>
