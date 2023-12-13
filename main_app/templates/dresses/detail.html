@@ -2,17 +2,36 @@
 {% block content %}
 
 <h1>Dress: {{ dress.name }}</h1>
-<div class="card">
-    <div class="card-content">
-        <span class="card-title">{{ dress.name }}</span>
-        <p>Designer: {{ dress.designer }}</p>
-        <p>Collection: {{ dress.collection }}</p>
-        <p>Style: {{ dress.style }}</p>
+
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ dress.name }}</span>
+                <p>Designer: {{ dress.designer }}</p>
+                <p>Collection: {{ dress.collection }}</p>
+                <p>Style: {{ dress.style }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'dresses_update' dress.id %}">Edit</a>
+                <a href="{% url 'dresses_delete' dress.id %}">Delete</a>
+            </div>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'dresses_update' dress.id %}">Edit</a>
-        <a href="{% url 'dresses_delete' dress.id %}">Delete</a>
+    <div class="col s6">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ review_form.as_p }}
+            <button type="submit" class="btn">Submit</button>
+        </form>
     </div>
 </div>
+
+<!-- We want the following JS to run after the elements are in the DOM, so we put the JS at the bottom of the template -->
+<script>
+    // To initialize the select for rating:
+    const selectEl = document.getElementById('id_rating');
+    M.FormSelect.init(selectEl);
+</script>
 
 {% endblock content %}

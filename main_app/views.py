@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Dress
+from .forms import ReviewForm
 
 # Create your views here.
 def home(request):
@@ -20,8 +21,10 @@ def dresses_index(request):
 
 def dresses_detail(request, dress_id):
     dress = Dress.objects.get(id=dress_id)
+    review_form = ReviewForm()
     return render(request, 'dresses/detail.html', {
-        'dress': dress
+        'dress': dress,
+        'review_form': review_form
     })
 
 class DressCreate(CreateView):

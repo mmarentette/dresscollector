@@ -33,7 +33,7 @@ class Dress(models.Model):
 
 class Review(models.Model):
     created_at = models.DateTimeField(default=timezone.now) # Swapping what's in parens for auto_now_add=True would work too (limitation: we wouldn't be able to modify this field, which should also be fine in this cased)
-    reviewer_name = models.CharField(max_length=50)
+    reviewer_name = models.CharField('Name', max_length=50)
     rating = models.PositiveIntegerField(
         choices=RATING_CHOICES,
         default=RATING_CHOICES[-1][-1],
