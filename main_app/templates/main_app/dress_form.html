@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Add Cat</h1>
+<!-- if the object exists (and 'dress' also exists), then we're in the UpdateView; if it doesn't, we're in the CreateView -->
+{% if object %}
+<h1>Edit Dress</h1>
+{% else %}
+<h1>Add Dress</h1>
+{% endif %}
+    
 <!-- Leaving action empty means the form will post to the same url used to render it -->
 <form action="" method="POST">
     <!-- Don't forget to include csrf on all Django forms: -->

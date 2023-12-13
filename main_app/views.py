@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Dress
 
@@ -27,3 +27,11 @@ def dresses_detail(request, dress_id):
 class DressCreate(CreateView):
     model = Dress
     fields = '__all__' # fields can be used to limit or change the ordering of attributes from the model that are generated in the ModelForm
+
+class DressUpdate(UpdateView):
+    model = Dress
+    fields = '__all__'
+
+class DressDelete(DeleteView):
+    model = Dress
+    success_url = '/dresses'

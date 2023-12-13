@@ -9,6 +9,10 @@
         <p>Collection: {{ dress.collection }}</p>
         <p>Style: {{ dress.style }}</p>
     </div>
+    <div class="card-action">
+        <a href="{% url 'dresses_update' dress.id %}">Edit</a>
+        <a href="{% url 'dresses_delete' dress.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock content %}
