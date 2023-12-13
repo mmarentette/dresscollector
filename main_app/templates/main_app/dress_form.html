@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Add Cat</h1>
+<!-- Leaving action empty means the form will post to the same url used to render it -->
+<form action="" method="POST">
+    <!-- Don't forget to include csrf on all Django forms: -->
+    {% csrf_token %}
+    <table>
+        <!-- form variable is automatically instantiated by ModelForm via CreateView and passed to template (via context dictionary) -->
+        {{ form.as_table }} 
+        <!-- Could instead use: form, form.as_p, form.as_ul -->
+    </table>
+    <button type="submit" class="btn">Submit</button>
+</form>
+
+<script>
+    selectEl = document.getElementById('id_style');
+    M.FormSelect.init(selectEl, {});
+</script>
+    
+{% endblock content %}
+    
