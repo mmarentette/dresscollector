@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="col s6">
-        <form action="" method="POST">
+        <form action="{% url 'add_review' dress.id %}" method="POST">
             {% csrf_token %}
             {{ review_form.as_p }}
             <button type="submit" class="btn">Submit</button>
@@ -40,11 +40,8 @@
                     <td>{{ review.rating }}</td>
                     <td>{{ review.text }}</td>
                 </tr>
-                    
                 {% endfor %}
-                    
             </tbody>
-
         </table>
     </div>
 </div>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Dress
@@ -26,6 +26,18 @@ def dresses_detail(request, dress_id):
         'dress': dress,
         'review_form': review_form
     })
+
+def add_review(request, dress_id):
+    # Create a ModelForm instance using the data in request.POST (which is similar to req.body in Express)
+    form = ReviewForm(request.POST)
+    # Validate the form
+    if form.is_valid():
+        new_review = form.save(commit=False)
+        new_review.dress_id = dress_id
+        new_review.save()
+    
+    # Always redirect instead of render if data has been changed in the database
+    return redirect('detail', dress_id=dress_id)
 
 class DressCreate(CreateView):
     model = Dress
