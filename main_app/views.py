@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Dress, Store
 from .forms import ReviewForm
@@ -54,3 +54,10 @@ class DressDelete(DeleteView):
 
 class StoreList(ListView):
     model = Store
+
+class StoreDetail(DetailView):
+    model = Store
+
+class StoreCreate(CreateView):
+    model = Store
+    fields = '__all__'
