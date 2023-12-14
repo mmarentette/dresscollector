@@ -50,13 +50,19 @@
 <hr>
 <div class="row">
     <div class="col s6">
-        <h3>Stores Carrying {{ dress.name }}:</h3>
+        <h4>Stores Carrying {{ dress.name }}:</h4>
         {% if dress.stores.count %}
         {% for store in dress.stores.all %}
         <div class="card">
             <div class="card-content">
                 <span class="card-title">{{ store.name }}</span>
                 <p>{{ store.street_address }}, {{ store.city }}, {{ store.province }}</p>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'unassoc_store' dress.id store.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Remove</button>
+                </form>
             </div>
         </div>
         {% endfor %}
@@ -65,7 +71,7 @@
         {% endif %}
     </div>
     <div class="col s6">
-        <h3>Other Stores</h3>
+        <h4>Other Stores:</h4>
         {% if stores_not_carrying.count %}
         {% for store in stores_not_carrying %}
         <div class="card">

@@ -52,6 +52,10 @@ def assoc_store(request, dress_id, store_id):
     # Note that in the above, we add the store_id instead of the store object
     return redirect('detail', dress_id=dress_id)
 
+def unassoc_store(request, dress_id, store_id):
+    Dress.objects.get(id=dress_id).stores.remove(store_id)
+    return redirect('detail', dress_id=dress_id)
+
 class DressCreate(CreateView):
     model = Dress
     fields = ['name', 'designer', 'collection', 'style'] # fields can be used to limit or change the ordering of attributes from the model that are generated in the ModelForm
