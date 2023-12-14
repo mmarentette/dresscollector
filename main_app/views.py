@@ -61,3 +61,11 @@ class StoreDetail(DetailView):
 class StoreCreate(CreateView):
     model = Store
     fields = '__all__'
+
+class StoreUpdate(UpdateView):
+    model = Store
+    fields = ['street_address', 'city', 'province', 'postal_code', 'website_url']
+
+class StoreDelete(DeleteView):
+    model = Store
+    success_url = '/stores'

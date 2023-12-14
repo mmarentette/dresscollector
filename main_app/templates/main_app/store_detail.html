@@ -13,6 +13,10 @@
             <!-- target="_blank" tells the browser to open link in new tab -->
             <!-- noreferrer/noopener prevent possible malicious attacks from pages linked to -->
         </div>
+        <div class="card-action">
+            <a href="{% url 'stores_delete' store.id %}">Delete</a>
+            <a href="{% url 'stores_update' store.id %}">Edit</a>
+        </div>
     </div>
 </div>
 
