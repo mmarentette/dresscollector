@@ -9,7 +9,9 @@
             <div class="card-content">
                 <span class="card-title">{{ dress.name }}</span>
                 <p>Designer: {{ dress.designer }}</p>
-                <p>Collection: {{ dress.collection }}</p>
+                {% if dress.collection %}
+                <p>Collection: {{ dress.collection }}</p>    
+                {% endif %}
                 <p>Style: {{ dress.get_style_display }}</p>
             </div>
             <div class="card-action">
@@ -59,7 +61,7 @@
         </div>
         {% endfor %}
         {% else %}
-        <p>{{ dress.name }} is not available in any stores 😔</p>
+        <p>{{ dress.name }} is not currently available in stores near you 😔</p>
         {% endif %}
     </div>
     <div class="col s6">

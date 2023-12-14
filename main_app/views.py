@@ -54,7 +54,7 @@ def assoc_store(request, dress_id, store_id):
 
 class DressCreate(CreateView):
     model = Dress
-    fields = '__all__' # fields can be used to limit or change the ordering of attributes from the model that are generated in the ModelForm
+    fields = ['name', 'designer', 'collection', 'style'] # fields can be used to limit or change the ordering of attributes from the model that are generated in the ModelForm
 
 class DressUpdate(UpdateView):
     model = Dress

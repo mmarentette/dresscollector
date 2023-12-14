@@ -36,7 +36,7 @@ class Dress(models.Model):
 
     name = models.CharField(max_length=100)
     designer = models.CharField(max_length=100)
-    collection = models.CharField(max_length=100)
+    collection = models.CharField(max_length=100, blank=True)
     style = models.CharField(
         max_length=15,
         choices=STYLE_CHOICES,
