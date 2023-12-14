@@ -7,14 +7,10 @@ RATING_CHOICES = [(i, i) for i in range(1, 6)]
 
 # Create your models here.
 class Store(models.Model):
-    name = models.CharField(max_length=100) #CharField max_length defaults to 200
+    name = models.CharField(max_length=50) #CharField max_length defaults to 200
     street_address = models.CharField(max_length=100)
-    city = models.CharField(
-        max_length=50,
-    )
-    province = CAProvinceField(
-        default='ON',
-    )
+    city = models.CharField(max_length=50)
+    province = CAProvinceField(default='ON')
     postal_code = CAPostalCodeField()
     website_url = models.URLField('Website URL') #URLField max_length defaults to 200
 
@@ -23,6 +19,9 @@ class Store(models.Model):
 
     def get_absolute_url(self):
         return reverse('stores_detail', kwargs={'pk': self.pk})
+    
+    class Meta:
+        ordering = ['name']
 
 class Dress(models.Model):
     STYLE_CHOICES = {
@@ -34,9 +33,9 @@ class Dress(models.Model):
         'short': 'Short',
     }
 
-    name = models.CharField(max_length=100)
-    designer = models.CharField(max_length=100)
-    collection = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=50)
+    designer = models.CharField(max_length=50)
+    collection = models.CharField(max_length=50, blank=True)
     style = models.CharField(
         max_length=15,
         choices=STYLE_CHOICES,
@@ -50,6 +49,9 @@ class Dress(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'dress_id': self.id})
         # reverse function is similar to url tag; redirects user to appropriate path (detail) and populates necessary route parameters from kwargs (dress_id)
+    
+    class Meta:
+        ordering = ['name']
 
 class Review(models.Model):
     created_at = models.DateTimeField(default=timezone.now) # Swapping what's in parens for auto_now_add=True would work too (limitation: we wouldn't be able to modify this field, which should also be fine in this cased)
@@ -59,7 +61,6 @@ class Review(models.Model):
         default=RATING_CHOICES[-1][-1],
     )
     text = models.TextField('Comments and Feedback', max_length=300)
-
     dress = models.ForeignKey(Dress, on_delete=models.CASCADE)
     # Note that the column for FK in the reviews table will be called dress_id (Django default behaviour)
     # First argument: parent Model
