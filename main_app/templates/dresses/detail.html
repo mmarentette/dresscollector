@@ -45,6 +45,45 @@
         </table>
     </div>
 </div>
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>Stores Carrying {{ dress.name }}:</h3>
+        {% if dress.stores.count %}
+        {% for store in dress.stores.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ store.name }}</span>
+                <p>{{ store.street_address }}, {{ store.city }}, {{ store.province }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>{{ dress.name }} is not available in any stores 😔</p>
+        {% endif %}
+    </div>
+    <div class="col s6">
+        <h3>Other Stores</h3>
+        {% if stores_not_carrying.count %}
+        {% for store in stores_not_carrying %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ store.name }}</span>
+                <p>{{ store.street_address }}, {{ store.city }}, {{ store.province }}</p>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_store' dress.id store.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No more stores to add</p>
+        {% endif %}
+    </div>
+</div>
 
 <!-- We want the following JS to run after the elements are in the DOM, so we put the JS at the bottom of the template -->
 <script>

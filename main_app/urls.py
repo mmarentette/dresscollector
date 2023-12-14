@@ -12,6 +12,7 @@ urlpatterns = [
     path('dresses/<int:pk>/update/', views.DressUpdate.as_view(), name='dresses_update'),
     path('dresses/<int:pk>/delete/', views.DressDelete.as_view(), name='dresses_delete'),
     path('dresses/<int:dress_id>/add_review', views.add_review, name='add_review'),
+    path('dresses/<int:dress_id>/assoc_store/<int:store_id>/', views.assoc_store, name='assoc_store'),
     path('stores/', views.StoreList.as_view(), name='stores_list'),
     path('stores/<int:pk>/', views.StoreDetail.as_view(), name='stores_detail'),
     path('stores/create/', views.StoreCreate.as_view(), name='stores_create'),

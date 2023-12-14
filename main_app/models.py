@@ -41,6 +41,7 @@ class Dress(models.Model):
         max_length=15,
         choices=STYLE_CHOICES,
     )
+    stores = models.ManyToManyField(Store)
 
     def __str__(self):
         return f"{self.designer}: {self.name}"

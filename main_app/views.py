@@ -22,10 +22,17 @@ def dresses_index(request):
 
 def dresses_detail(request, dress_id):
     dress = Dress.objects.get(id=dress_id)
+    # Create a list of the store ids a dress DOES have
+    store_id_list = dress.stores.all().values_list('id')
+    # Then, query for stores whose ids are not in the list using exclude
+    # Exclude is similar to filter except that it returns objects that DON'T meet the criteria
+    # id__in is a Django 'field lookup' that checks if the model's id is in a list
+    stores_not_carrying = Store.objects.exclude(id__in=store_id_list)
     review_form = ReviewForm()
     return render(request, 'dresses/detail.html', {
         'dress': dress,
-        'review_form': review_form
+        'review_form': review_form,
+        'stores_not_carrying': stores_not_carrying
     })
 
 def add_review(request, dress_id):
@@ -38,6 +45,11 @@ def add_review(request, dress_id):
         new_review.save()
     
     # Always redirect instead of render if data has been changed in the database
+    return redirect('detail', dress_id=dress_id)
+
+def assoc_store(request, dress_id, store_id):
+    Dress.objects.get(id=dress_id).stores.add(store_id)
+    # Note that in the above, we add the store_id instead of the store object
     return redirect('detail', dress_id=dress_id)
 
 class DressCreate(CreateView):
