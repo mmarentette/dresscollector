@@ -2,6 +2,15 @@
 
 {% block content %}
 <h1>Stores</h1>
-    
+<!-- store_list or object_list both work! -->
+{% for store in store_list %}
+<a href="{% url 'stores_detail' store.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ store.name }}</span>
+        </div>
+    </div>
+</a>
+{% endfor %}
+
 {% endblock content %}
-    

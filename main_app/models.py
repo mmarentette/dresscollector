@@ -11,16 +11,18 @@ class Store(models.Model):
     street_address = models.CharField(max_length=100)
     city = models.CharField(
         max_length=50,
-        default='Toronto',
     )
     province = CAProvinceField(
         default='ON',
     )
     postal_code = CAPostalCodeField()
-    website_url = models.URLField() #URLField max_length defaults to 200
+    website_url = models.URLField('Website URL') #URLField max_length defaults to 200
 
     def __str__(self):
         return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse('stores_detail', kwargs={'pk': self.pk})
 
 class Dress(models.Model):
     STYLE_CHOICES = {

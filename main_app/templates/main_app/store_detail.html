@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h1>Store Details</h1>
-    
+
+<h1>Store: {{ store.name }}</h1>
+<div class="col s6">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ store.name }}</span>
+            <p>{{ store.street_address }}, {{ store.city }}</p>
+            <p>{{ store.get_province_display }}</p>
+            <p>{{ store.postal_code }}</p>
+            <a href="{{ store.website_url }}" target="_blank" rel="noopener noreferrer">Visit website</a> 
+            <!-- target="_blank" tells the browser to open link in new tab -->
+            <!-- noreferrer/noopener prevent possible malicious attacks from pages linked to -->
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
     
