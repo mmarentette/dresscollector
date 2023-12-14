@@ -1,8 +1,11 @@
+import os
+import uuid
+import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
-from .models import Dress, Store
+from .models import Dress, Store, Photo
 from .forms import ReviewForm
 
 # Create your views here.
@@ -45,6 +48,25 @@ def add_review(request, dress_id):
         new_review.save()
     
     # Always redirect instead of render if data has been changed in the database
+    return redirect('detail', dress_id=dress_id)
+
+def add_photo(request, dress_id):
+    # photo-file will be name attribute on <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # generate uniqu "key" for S3 with image file extension
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            # Build full url string:
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            # Create a photo object ans assign to dress_id (if we already got the dress object within this function, we could have created the object from that side of the relationship too)
+            Photo.objects.create(url=url, dress_id=dress_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
     return redirect('detail', dress_id=dress_id)
 
 def assoc_store(request, dress_id, store_id):

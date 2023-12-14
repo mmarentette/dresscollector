@@ -71,3 +71,10 @@ class Review(models.Model):
     
     class Meta:
         ordering = ['-created_at']
+
+class Photo(models.Model):
+    url = models.CharField(max_length=300)
+    dress = models.ForeignKey(Dress, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for dress_id: {self.dress_id} @{self.url}"
